@@ -1,0 +1,27 @@
+{
+  "name": "Pen",
+  "version": "0.1.0",
+  "main": "index.html",
+  "scripts": {
+    "start": "node_modules/nodewebkit/bin/nodewebkit"
+  },
+  "window": {
+    "title": "Pen",
+    "toolbar": true,
+    "frame": true,
+    "width": 800,
+    "height": 500,
+    "position": "mouse",
+    "min_width": 400,
+    "min_height": 200,
+    "max_width": 800,
+    "max_height": 600
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-coffee": "^0.10.1",
+    "grunt-contrib-compass": "^0.8.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-node-webkit-builder": "^0.1.21"
+  }
+}
