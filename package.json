@@ -7,7 +7,7 @@
   },
   "window": {
     "title": "Pen",
-    "toolbar": true,
+    "toolbar": false,
     "frame": true,
     "width": 800,
     "height": 500,

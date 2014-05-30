@@ -42,7 +42,7 @@
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
     context.strokeStyle = "#df4b26";
     context.lineJoin = "round";
-    context.lineWidth = 5;
+    context.lineWidth = 3;
     i = 0;
     while (i < clickX.length) {
       context.beginPath();

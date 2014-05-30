@@ -40,10 +40,8 @@ module.exports = (grunt) ->
 
     nodewebkit:
       options:
-        version: '0.1.0'
-        force_download: true
-        build_dir: './build' # Where the build version of my node-webkit app is saved
-        mac_icns: false # Path to the Mac icon file
+        build_dir: './build'
+        mac_icns: false
         mac: true
         win: true
         linux32: false
