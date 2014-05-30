@@ -38,6 +38,11 @@ module.exports = (grunt) ->
           sassDir: 'scss'
           cssDir: 'css'
 
+    slim:
+      dist:
+        files:
+          'index.html': 'index.slim'
+
     nodewebkit:
       options:
         build_dir: './build'
@@ -52,6 +57,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-compass'
+  grunt.loadNpmTasks 'grunt-slim'
   grunt.loadNpmTasks 'grunt-node-webkit-builder'
 
   # Register tasks
@@ -59,5 +65,6 @@ module.exports = (grunt) ->
 
   grunt.registerTask 'build', [
     'coffee:main',
-    'compass:main'
+    'compass:main',
+    'slim:dist'
   ]
