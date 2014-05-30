@@ -22,6 +22,7 @@
     "grunt-contrib-coffee": "^0.10.1",
     "grunt-contrib-compass": "^0.8.0",
     "grunt-contrib-watch": "^0.6.1",
-    "grunt-node-webkit-builder": "^0.1.21"
+    "grunt-node-webkit-builder": "^0.1.21",
+    "grunt-slim": "^0.1.0"
   }
 }
