@@ -24,6 +24,9 @@ module.exports = (grunt) ->
       scss:
         files: 'scss/**/*.scss',
         tasks: ['compass:main']
+      slim:
+        files: 'index.slim',
+        tasks: ['slim:dist']
 
     # Coffee compile
     coffee:
