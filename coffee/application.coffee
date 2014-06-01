@@ -36,9 +36,9 @@ addClick = (x, y, dragging) ->
 
 redraw = ->
   context.clearRect 0, 0, context.canvas.width, context.canvas.height # Clears the canvas
-  context.strokeStyle = "#df4b26"
+  context.strokeStyle = "#8e763d"
   context.lineJoin = "round"
-  context.lineWidth = 3
+  context.lineWidth = 1
   i = 0
 
   while i < clickX.length

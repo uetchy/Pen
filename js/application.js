@@ -40,9 +40,9 @@
   redraw = function() {
     var i;
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
-    context.strokeStyle = "#df4b26";
+    context.strokeStyle = "#8e763d";
     context.lineJoin = "round";
-    context.lineWidth = 3;
+    context.lineWidth = 1;
     i = 0;
     while (i < clickX.length) {
       context.beginPath();
