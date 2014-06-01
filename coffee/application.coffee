@@ -1,5 +1,6 @@
 # var fs = require('fs');
-# var gui = require('nw.gui');
+gui = require 'nw.gui'
+win = gui.Window.get()
 
 # function clickInput(id) {
 #   var event = document.createEvent('MouseEvents');
@@ -13,13 +14,66 @@
 #   }
 # });
 
+# Window management
+$(".global-icon-close").on "click", ->
+  win.close true
+
+$(".global-icon-minimize").on "click", ->
+  win.minimize()
+
+$(".global-icon-maximize").on "click", ->
+  win.maximize()
+
 clickX = new Array()
 clickY = new Array()
 clickDrag = new Array()
 paint = undefined
 
+theme = [
+  {
+    name: "Tori"
+    mainColor: "#8e763d"
+    baseColor: "#f2d99c"
+  },
+  {
+    name: "Mozuku"
+    mainColor: "#75a77c"
+    baseColor: "#a0e0a9"
+  },
+  {
+    name: "Maguro"
+    mainColor: "#7f3333"
+    baseColor: "#c15555"
+  }
+]
+
+strokeColor = theme[0].mainColor
+canvasColor = theme[0].baseColor
+
+theme.forEach (t)->
+  li = document.createElement 'li'
+  li.setAttribute 'class', 'theme-label'
+  li.setAttribute 'data-theme-name', t.name
+  li.setAttribute 'style', "background-color: #{t.baseColor}; color: #{t.mainColor}"
+  li.innerHTML = t.name
+  $(li).appendTo ".js-theme"
+
+$('.theme-label').on 'click', (e)->
+  e.preventDefault()
+  target = $(this)
+  theme_name = target.data('theme-name')
+  theme.forEach (t)->
+    if t.name == theme_name
+      strokeColor = t.mainColor
+      canvasColor = t.baseColor
+      $(canvasDiv).css backgroundColor: canvasColor
+      redraw()
+
+      $('.theme-label').removeClass 'active'
+      target.addClass 'active'
+
 canvasDiv = document.getElementById("canvasDiv")
-$(canvasDiv).css height: $(window).height() - $('#header').innerHeight()
+$(canvasDiv).css height: $(window).height() - $('#header').innerHeight(), backgroundColor: canvasColor
 canvas = document.createElement("canvas")
 canvas.setAttribute "id", "canvas"
 canvas.setAttribute "width", $(canvasDiv).width()
@@ -36,7 +90,7 @@ addClick = (x, y, dragging) ->
 
 redraw = ->
   context.clearRect 0, 0, context.canvas.width, context.canvas.height # Clears the canvas
-  context.strokeStyle = "#8e763d"
+  context.strokeStyle = strokeColor
   context.lineJoin = "round"
   context.lineWidth = 1
   i = 0

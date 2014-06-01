@@ -9,13 +9,23 @@ html, body {
   width: 100%;
   height: 100%;
   overflow: hidden;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 body {
   font-family: sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
 .header {
+  -webkit-app-region: drag;
+
   background: #544d4d;
   color: #fff;
 
@@ -23,6 +33,8 @@ body {
 }
 
 .menu {
+  -webkit-app-region: no-drag;
+
   ul {
     @include clearfix;
 
@@ -35,6 +47,15 @@ body {
       text-align: center;
       text-transform: uppercase;
       letter-spacing: 2px;
+
+      cursor: pointer;
+
+      -webkit-transform-origin: 0 100%;
+      @include transition(all 0.2s ease-in-out);
+
+      &:hover:not(.active) {
+        @include transform(scale(1.0, 0.9));
+      }
     }
   }
 
@@ -42,18 +63,33 @@ body {
     float: left;
   }
 
-  &.menu-color {
+  &.menu-theme {
     float: right;
 
     ul li {
       width: 120px;
     }
   }
+}
 
-  .menu-color-tori {
-    background: #f2d99c;
-    color: #afa64b;
-  }
+.global-icon {
+  width: 12px;
+  height: 12px;
+  padding: 0 !important;
+  margin: 14px 8px 0 0;
+  @include border-radius(6px);
+}
+
+.global-icon-close {
+  background-color: #f7534d;
+}
+
+.global-icon-minimize {
+  background-color: #fdda86;
+}
+
+.global-icon-maximize {
+  background-color: #b2cc63;
 }
 
 .splitter {
@@ -64,5 +100,4 @@ body {
 
 #canvasDiv {
   width: 100%;
-  background: #f2d99c;
 }

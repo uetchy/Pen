@@ -2,18 +2,20 @@ doctype html
 html
   head
     title Pen
-    link href="css/application.css" rel="stylesheet" type="text/css" /
+    link href="css/application.css" rel="stylesheet" type="text/css"
   body
     header.header
       nav.menu.menu-global
         ul
           li Pen
-      nav.menu.menu-color
-        ul
-          li.menu-color-tori Tori
-          li Mozuku
-          li Sushi
+          li.global-icon.global-icon-close
+          li.global-icon.global-icon-minimize
+          li.global-icon.global-icon-maximize
+
+      nav.menu.menu-theme
+        ul.js-theme
+
     #canvasDiv
+
     script src="js/jquery.js"
     script src="js/application.js"
-    /! script type="text/javascript" src="js/canvas.js"
