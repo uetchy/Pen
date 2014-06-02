@@ -183,3 +183,8 @@ body {
 #canvasDiv {
   width: 100%;
 }
+
+/* line 105, ../scss/application.scss */
+#canvas {
+  cursor: url(images/dot.png);
+}
