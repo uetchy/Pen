@@ -1,21 +1,26 @@
 (function() {
-  var addClick, canvas, canvasColor, canvasDiv, clickDrag, clickX, clickY, context, gui, paint, redraw, strokeColor, theme, win;
+  var addPoint, canvas, canvasColor, canvasDiv, clickDrag, clickInput, clickX, clickY, context, fs, gui, paint, redraw, strokeColor, theme, win;
+
+  fs = require('fs');
 
   gui = require('nw.gui');
 
   win = gui.Window.get();
 
-  $(".global-icon-close").on("click", function() {
-    return win.close(true);
-  });
+  clickInput = function(id) {
+    var event;
+    event = document.createEvent('MouseEvents');
+    event.initMouseEvent('click');
+    return document.getElementById(id).dispatchEvent(event);
+  };
 
-  $(".global-icon-minimize").on("click", function() {
-    return win.minimize();
-  });
-
-  $(".global-icon-maximize").on("click", function() {
-    return win.maximize();
-  });
+  document.addEventListener('keyup', (function(_this) {
+    return function(e) {
+      if (e.keyCode === 'N'.charCodeAt(0) && e.ctrlKey) {
+        return gui.Window.open('index.html');
+      }
+    };
+  })(this));
 
   clickX = new Array();
 
@@ -27,19 +32,31 @@
 
   theme = [
     {
-      name: "Tori",
-      mainColor: "#8e763d",
-      baseColor: "#f2d99c"
+      name: 'Tori',
+      mainColor: '#8e763d',
+      baseColor: '#f2d99c'
     }, {
-      name: "Mozuku",
-      mainColor: "#75a77c",
-      baseColor: "#a0e0a9"
+      name: 'Mozuku',
+      mainColor: '#75a77c',
+      baseColor: '#a0e0a9'
     }, {
-      name: "Maguro",
-      mainColor: "#7f3333",
-      baseColor: "#c15555"
+      name: 'Maguro',
+      mainColor: '#7f3333',
+      baseColor: '#c15555'
     }
   ];
+
+  $(".global-icon-close").on('click', function() {
+    return win.close(true);
+  });
+
+  $('.global-icon-minimize').on('click', function() {
+    return win.minimize();
+  });
+
+  $('.global-icon-maximize').on('click', function() {
+    return win.maximize();
+  });
 
   strokeColor = theme[0].mainColor;
 
@@ -52,7 +69,7 @@
     li.setAttribute('data-theme-name', t.name);
     li.setAttribute('style', "background-color: " + t.baseColor + "; color: " + t.mainColor);
     li.innerHTML = t.name;
-    return $(li).appendTo(".js-theme");
+    return $(li).appendTo('.js-theme');
   });
 
   $('.theme-label').on('click', function(e) {
@@ -74,42 +91,56 @@
     });
   });
 
-  canvasDiv = document.getElementById("canvasDiv");
+  canvasDiv = document.getElementById('canvasDiv');
 
   $(canvasDiv).css({
-    height: $(window).height() - $('#header').innerHeight(),
-    backgroundColor: canvasColor
+    height: $(window).height() - $('.header').innerHeight()
   });
 
-  canvas = document.createElement("canvas");
+  canvas = document.createElement('canvas');
 
-  canvas.setAttribute("id", "canvas");
+  canvas.setAttribute('id', 'canvas');
 
-  canvas.setAttribute("width", $(canvasDiv).width());
+  canvas.setAttribute('width', $(canvasDiv).width());
 
-  canvas.setAttribute("height", $(canvasDiv).height());
+  canvas.setAttribute('height', $(canvasDiv).height());
 
   canvasDiv.appendChild(canvas);
 
-  if (typeof G_vmlCanvasManager !== "undefined") {
+  if (typeof G_vmlCanvasManager !== 'undefined') {
     canvas = G_vmlCanvasManager.initElement(canvas);
   }
 
-  context = canvas.getContext("2d");
+  context = canvas.getContext('2d');
 
-  addClick = function(x, y, dragging) {
+  $(window).on('resize', function(e) {
+    var canvasHeight, canvasWidth;
+    canvasWidth = $(this).width();
+    canvasHeight = $(this).height() - $('.header').innerHeight();
+    $('#canvasDiv').css({
+      width: canvasWidth,
+      height: canvasHeight
+    });
+    $('#canvas').attr('width', canvasWidth);
+    $('#canvas').attr('height', canvasHeight);
+    return redraw();
+  });
+
+  addPoint = function(x, y, dragging) {
     clickX.push(x);
     clickY.push(y);
-    clickDrag.push(dragging);
+    return clickDrag.push(dragging);
   };
 
   redraw = function() {
-    var i;
-    context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+    var i, _results;
+    context.fillStyle = canvasColor;
+    context.fillRect(0, 0, context.canvas.width, context.canvas.height);
     context.strokeStyle = strokeColor;
-    context.lineJoin = "round";
+    context.lineJoin = 'round';
     context.lineWidth = 1;
     i = 0;
+    _results = [];
     while (i < clickX.length) {
       context.beginPath();
       if (clickDrag[i] && i) {
@@ -120,32 +151,35 @@
       context.lineTo(clickX[i], clickY[i]);
       context.closePath();
       context.stroke();
-      i++;
+      _results.push(i++);
     }
+    return _results;
   };
 
-  $("#canvas").mousedown(function(e) {
+  $('#canvas').mousedown(function(e) {
     var mouseX, mouseY;
     mouseX = e.pageX - this.offsetLeft;
     mouseY = e.pageY - this.offsetTop;
     paint = true;
-    addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop);
-    redraw();
+    addPoint(e.pageX - this.offsetLeft, e.pageY - this.offsetTop);
+    return redraw();
   });
 
-  $("#canvas").mousemove(function(e) {
+  $('#canvas').mousemove(function(e) {
     if (paint) {
-      addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
-      redraw();
+      addPoint(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
+      return redraw();
     }
   });
 
-  $("#canvas").mouseup(function(e) {
-    paint = false;
+  $('#canvas').mouseup(function(e) {
+    return paint = false;
   });
 
-  $("#canvas").mouseleave(function(e) {
-    paint = false;
+  $('#canvas').mouseleave(function(e) {
+    return paint = false;
   });
+
+  redraw();
 
 }).call(this);
