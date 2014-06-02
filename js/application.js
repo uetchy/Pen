@@ -180,6 +180,14 @@
     return paint = false;
   });
 
+  saveImage(function() {
+    var buf, data, img;
+    img = $('#canvas')[0].toDataURL();
+    data = img.replace(/^data:image\/\w+;base64,/, "");
+    buf = new Buffer(data, 'base64');
+    return fs.writeFile('image.png', buf);
+  });
+
   redraw();
 
 }).call(this);

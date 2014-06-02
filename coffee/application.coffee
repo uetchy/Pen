@@ -139,5 +139,12 @@ $('#canvas').mouseup (e) ->
 $('#canvas').mouseleave (e) ->
   paint = false
 
+# Save
+saveImage ->
+  img = $('#canvas')[0].toDataURL()
+  data = img.replace(/^data:image\/\w+;base64,/, "")
+  buf = new Buffer(data, 'base64')
+  fs.writeFile 'image.png', buf
+
 # Initialize methods
 redraw()
