@@ -16,6 +16,8 @@ clickY = new Array()
 clickDrag = new Array()
 paint = undefined
 
+header = $('#header')
+
 theme = [
   {
     name: 'Tori'
@@ -43,6 +45,13 @@ $('.global-icon-minimize').on 'click', ->
 
 $('.global-icon-maximize').on 'click', ->
   win.maximize()
+
+$('.menu-btn').on 'click', (e)->
+  e.preventDefault()
+  # if header.hasClass('menu-open')
+  #   header.removeClass('menu-open')
+  # else
+  #   header.addClass('menu-open')
 
 strokeColor = theme[0].mainColor
 canvasColor = theme[0].baseColor
@@ -73,7 +82,7 @@ $('.theme-label').on 'click', (e)->
 
 # Initialize canvas
 canvasDiv = document.getElementById('canvasDiv')
-$(canvasDiv).css height: $(window).height() - $('.header').innerHeight()
+$(canvasDiv).css height: $(window).height() - header.innerHeight()
 
 canvas = document.createElement('canvas')
 canvas.setAttribute 'id', 'canvas'
@@ -87,7 +96,7 @@ context = canvas.getContext('2d')
 # Resize handler
 $(window).on 'resize', (e)->
   canvasWidth = $(this).width()
-  canvasHeight = $(this).height() - $('.header').innerHeight()
+  canvasHeight = $(this).height() - header.innerHeight()
   $('#canvasDiv').css width: canvasWidth, height: canvasHeight
   $('#canvas').attr 'width', canvasWidth
   $('#canvas').attr 'height', canvasHeight
@@ -140,7 +149,7 @@ $('#canvas').mouseleave (e) ->
   paint = false
 
 # Save
-saveImage ->
+saveImage = ->
   img = $('#canvas')[0].toDataURL()
   data = img.replace(/^data:image\/\w+;base64,/, "")
   buf = new Buffer(data, 'base64')

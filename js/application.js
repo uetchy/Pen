@@ -1,5 +1,5 @@
 (function() {
-  var addPoint, canvas, canvasColor, canvasDiv, clickDrag, clickInput, clickX, clickY, context, fs, gui, paint, redraw, strokeColor, theme, win;
+  var addPoint, canvas, canvasColor, canvasDiv, clickDrag, clickInput, clickX, clickY, context, fs, gui, header, paint, redraw, saveImage, strokeColor, theme, win;
 
   fs = require('fs');
 
@@ -30,6 +30,8 @@
 
   paint = void 0;
 
+  header = $('#header');
+
   theme = [
     {
       name: 'Tori',
@@ -56,6 +58,10 @@
 
   $('.global-icon-maximize').on('click', function() {
     return win.maximize();
+  });
+
+  $('.menu-btn').on('click', function(e) {
+    return e.preventDefault();
   });
 
   strokeColor = theme[0].mainColor;
@@ -94,7 +100,7 @@
   canvasDiv = document.getElementById('canvasDiv');
 
   $(canvasDiv).css({
-    height: $(window).height() - $('.header').innerHeight()
+    height: $(window).height() - header.innerHeight()
   });
 
   canvas = document.createElement('canvas');
@@ -116,7 +122,7 @@
   $(window).on('resize', function(e) {
     var canvasHeight, canvasWidth;
     canvasWidth = $(this).width();
-    canvasHeight = $(this).height() - $('.header').innerHeight();
+    canvasHeight = $(this).height() - header.innerHeight();
     $('#canvasDiv').css({
       width: canvasWidth,
       height: canvasHeight
@@ -180,13 +186,13 @@
     return paint = false;
   });
 
-  saveImage(function() {
+  saveImage = function() {
     var buf, data, img;
     img = $('#canvas')[0].toDataURL();
     data = img.replace(/^data:image\/\w+;base64,/, "");
     buf = new Buffer(data, 'base64');
     return fs.writeFile('image.png', buf);
-  });
+  };
 
   redraw();
 

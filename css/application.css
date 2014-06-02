@@ -87,27 +87,29 @@ html, body {
 body {
   font-family: sans-serif;
   -webkit-font-smoothing: antialiased;
+  background-color: #544d4d;
 }
 
-/* line 26, ../scss/application.scss */
-.header {
+/* line 28, ../scss/application.scss */
+#header {
   -webkit-app-region: drag;
+  position: relative;
   background: #544d4d;
   color: #fff;
   overflow: hidden;
   *zoom: 1;
 }
 
-/* line 35, ../scss/application.scss */
+/* line 38, ../scss/application.scss */
 .menu {
   -webkit-app-region: no-drag;
 }
-/* line 38, ../scss/application.scss */
+/* line 41, ../scss/application.scss */
 .menu ul {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 41, ../scss/application.scss */
+/* line 44, ../scss/application.scss */
 .menu ul li {
   float: left;
   padding: 15px;
@@ -123,7 +125,7 @@ body {
   -o-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
 }
-/* line 56, ../scss/application.scss */
+/* line 59, ../scss/application.scss */
 .menu ul li:hover:not(.active) {
   -webkit-transform: scale(1, 0.9);
   -moz-transform: scale(1, 0.9);
@@ -131,20 +133,20 @@ body {
   -o-transform: scale(1, 0.9);
   transform: scale(1, 0.9);
 }
-/* line 62, ../scss/application.scss */
+/* line 65, ../scss/application.scss */
 .menu.menu-global {
   float: left;
 }
-/* line 66, ../scss/application.scss */
+/* line 69, ../scss/application.scss */
 .menu.menu-theme {
   float: right;
 }
-/* line 69, ../scss/application.scss */
+/* line 72, ../scss/application.scss */
 .menu.menu-theme ul li {
   width: 120px;
 }
 
-/* line 75, ../scss/application.scss */
+/* line 78, ../scss/application.scss */
 .global-icon {
   width: 12px;
   height: 12px;
@@ -157,34 +159,41 @@ body {
   border-radius: 6px;
 }
 
-/* line 83, ../scss/application.scss */
+/* line 86, ../scss/application.scss */
 .global-icon-close {
   background-color: #f7534d;
 }
 
-/* line 87, ../scss/application.scss */
+/* line 90, ../scss/application.scss */
 .global-icon-minimize {
   background-color: #fdda86;
 }
 
-/* line 91, ../scss/application.scss */
+/* line 94, ../scss/application.scss */
 .global-icon-maximize {
   background-color: #b2cc63;
 }
 
-/* line 95, ../scss/application.scss */
+/* line 98, ../scss/application.scss */
 .splitter {
   width: 100%;
   height: 5px;
   background: #f2d99c;
 }
 
-/* line 101, ../scss/application.scss */
+/* line 104, ../scss/application.scss */
+#sideBar {
+  width: 120px;
+  height: 100%;
+  position: absolute;
+}
+
+/* line 112, ../scss/application.scss */
 #canvasDiv {
   width: 100%;
 }
 
-/* line 105, ../scss/application.scss */
+/* line 116, ../scss/application.scss */
 #canvas {
   cursor: url(images/dot.png);
 }
