@@ -89,11 +89,12 @@
   };
 
   $('.save-btn').on('click', function(e) {
-    e.preventDefault();
     return chooseFile('#saveDialog', function(path) {
       return saveImage(path);
     });
   });
+
+  $('.sign-in-btn').on('clickl', function(e) {});
 
   strokeColor = theme[0].mainColor;
 

@@ -1,6 +1,6 @@
-fs = require 'fs'
-gui = require 'nw.gui'
-win = gui.Window.get()
+fs    = require 'fs'
+gui   = require 'nw.gui'
+win   = gui.Window.get()
 
 clickInput = (id)->
   event = document.createEvent('MouseEvents')
@@ -68,9 +68,11 @@ saveImage = (path)->
   fs.writeFile path, buf
 
 $('.save-btn').on 'click', (e)->
-  e.preventDefault()
   chooseFile '#saveDialog', (path)->
     saveImage(path)
+
+$('.sign-in-btn').on 'clickl', (e)->
+
 
 strokeColor = theme[0].mainColor
 canvasColor = theme[0].baseColor
