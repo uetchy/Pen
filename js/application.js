@@ -94,8 +94,6 @@
     });
   });
 
-  $('.sign-in-btn').on('clickl', function(e) {});
-
   strokeColor = theme[0].mainColor;
 
   canvasColor = theme[0].baseColor;

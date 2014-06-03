@@ -71,7 +71,7 @@ $('.save-btn').on 'click', (e)->
   chooseFile '#saveDialog', (path)->
     saveImage(path)
 
-$('.sign-in-btn').on 'clickl', (e)->
+# $('.sign-in-btn').on 'clickl', (e)->
 
 
 strokeColor = theme[0].mainColor
