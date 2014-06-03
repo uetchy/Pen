@@ -119,10 +119,11 @@ body {
 
   ul {
     li {
-      a {
+      span {
         display: block;
         padding: 15px;
 
+        cursor: pointer;
         color: #fff;
         text-decoration: none;
 
