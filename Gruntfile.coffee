@@ -58,9 +58,9 @@ module.exports = (grunt) ->
         './css/**',
         './images/**',
         './js/**',
+        './index.html',
         './node_modules/**',
         '!./node_modules/grunt*/**',
-        './index.html',
         './package.json',
         './README.md'
       ]
