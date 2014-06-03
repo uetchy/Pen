@@ -45,7 +45,7 @@ body {
       float: left;
       padding: 15px;
 
-      font-family: Acrom;
+      font-family: Acrom, sans-serif;
       font-size: 12px;
       text-align: center;
       text-transform: uppercase;
@@ -106,7 +106,32 @@ body {
   height: 100%;
   position: absolute;
 
-  // background: #544d4d;
+  background: #544d4d;
+  color: #fff;
+  font-family: Acrom, sans-serif;
+
+  @include transition(all 0.2s ease-in-out);
+  @include transform(translateX(-120px));
+
+  &.open {
+    @include transform(translateX(0));
+  }
+
+  ul {
+    li {
+      a {
+        display: block;
+        padding: 15px;
+
+        color: #fff;
+        text-decoration: none;
+
+        &:hover {
+          background: darken(#544d4d, 10%);
+        }
+      }
+    }
+  }
 }
 
 #canvasDiv {

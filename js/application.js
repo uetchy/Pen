@@ -1,5 +1,5 @@
 (function() {
-  var addPoint, canvas, canvasColor, canvasDiv, clickDrag, clickInput, clickX, clickY, context, fs, gui, header, paint, redraw, saveImage, strokeColor, theme, win;
+  var addPoint, canvas, canvasColor, canvasDiv, clickDrag, clickInput, clickX, clickY, context, fs, gui, header, paint, redraw, saveImage, sideBar, strokeColor, theme, win;
 
   fs = require('fs');
 
@@ -32,6 +32,8 @@
 
   header = $('#header');
 
+  sideBar = $('#sideBar');
+
   theme = [
     {
       name: 'Tori',
@@ -61,7 +63,12 @@
   });
 
   $('.menu-btn').on('click', function(e) {
-    return e.preventDefault();
+    e.preventDefault();
+    if (sideBar.hasClass('open')) {
+      return sideBar.removeClass('open');
+    } else {
+      return sideBar.addClass('open');
+    }
   });
 
   strokeColor = theme[0].mainColor;

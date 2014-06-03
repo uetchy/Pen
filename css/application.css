@@ -113,7 +113,7 @@ body {
 .menu ul li {
   float: left;
   padding: 15px;
-  font-family: Acrom;
+  font-family: Acrom, sans-serif;
   font-size: 12px;
   text-align: center;
   text-transform: uppercase;
@@ -186,14 +186,45 @@ body {
   width: 120px;
   height: 100%;
   position: absolute;
+  background: #544d4d;
+  color: #fff;
+  font-family: Acrom, sans-serif;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  -webkit-transform: translateX(-120px);
+  -moz-transform: translateX(-120px);
+  -ms-transform: translateX(-120px);
+  -o-transform: translateX(-120px);
+  transform: translateX(-120px);
+}
+/* line 116, ../scss/application.scss */
+#sideBar.open {
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+  -ms-transform: translateX(0);
+  -o-transform: translateX(0);
+  transform: translateX(0);
+}
+/* line 122, ../scss/application.scss */
+#sideBar ul li a {
+  display: block;
+  padding: 15px;
+  color: #fff;
+  text-decoration: none;
+}
+/* line 129, ../scss/application.scss */
+#sideBar ul li a:hover {
+  background: #393535;
 }
 
-/* line 112, ../scss/application.scss */
+/* line 137, ../scss/application.scss */
 #canvasDiv {
   width: 100%;
 }
 
-/* line 116, ../scss/application.scss */
+/* line 141, ../scss/application.scss */
 #canvas {
   cursor: url(images/dot.png);
 }

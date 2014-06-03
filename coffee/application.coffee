@@ -17,6 +17,7 @@ clickDrag = new Array()
 paint = undefined
 
 header = $('#header')
+sideBar = $('#sideBar')
 
 theme = [
   {
@@ -48,10 +49,10 @@ $('.global-icon-maximize').on 'click', ->
 
 $('.menu-btn').on 'click', (e)->
   e.preventDefault()
-  # if header.hasClass('menu-open')
-  #   header.removeClass('menu-open')
-  # else
-  #   header.addClass('menu-open')
+  if sideBar.hasClass('open')
+    sideBar.removeClass('open')
+  else
+    sideBar.addClass('open')
 
 strokeColor = theme[0].mainColor
 canvasColor = theme[0].baseColor

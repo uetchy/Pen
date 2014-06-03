@@ -49,12 +49,21 @@ module.exports = (grunt) ->
     nodewebkit:
       options:
         build_dir: './build'
-        mac_icns: false
+        mac_icns: './images/icon.icns'
         mac: true
         win: true
         linux32: false
         linux64: false
-      src: ['./css/**', './images/**', './js/**', './node_modules/**', '!./node_modules/grunt*/**', './index.html', './package.json', './README.md' ]
+      src: [
+        './css/**',
+        './images/**',
+        './js/**',
+        './node_modules/**',
+        '!./node_modules/grunt*/**',
+        './index.html',
+        './package.json',
+        './README.md'
+      ]
 
   # Load global tasks
   grunt.loadNpmTasks 'grunt-contrib-watch'
