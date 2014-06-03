@@ -54,6 +54,24 @@ $('.menu-btn').on 'click', (e)->
   else
     sideBar.addClass('open')
 
+chooseFile = (name, done)->
+  chooser = $(name)
+  chooser.change (evt)->
+    done($(this).val())
+
+  chooser.trigger('click')
+
+saveImage = (path)->
+  img = $('#canvas')[0].toDataURL()
+  data = img.replace(/^data:image\/\w+;base64,/, "")
+  buf = new Buffer(data, 'base64')
+  fs.writeFile path, buf
+
+$('.save-btn').on 'click', (e)->
+  e.preventDefault()
+  chooseFile '#saveDialog', (path)->
+    saveImage(path)
+
 strokeColor = theme[0].mainColor
 canvasColor = theme[0].baseColor
 
@@ -148,13 +166,6 @@ $('#canvas').mouseup (e) ->
 
 $('#canvas').mouseleave (e) ->
   paint = false
-
-# Save
-saveImage = ->
-  img = $('#canvas')[0].toDataURL()
-  data = img.replace(/^data:image\/\w+;base64,/, "")
-  buf = new Buffer(data, 'base64')
-  fs.writeFile 'image.png', buf
 
 # Initialize methods
 redraw()

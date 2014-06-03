@@ -4,6 +4,7 @@ html
     title Pen
     link href="css/application.css" rel="stylesheet" type="text/css"
   body
+    input style="display:none;" id="saveDialog" type="file" nwsaveas='canvas.png'
     header#header
       nav.menu.menu-global
         ul
@@ -17,7 +18,7 @@ html
 
     #sideBar
       ul
-        li: a href='' onclick='return false;' Save
+        li: span.save-btn Save
 
     #canvasDiv
 

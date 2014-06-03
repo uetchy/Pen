@@ -208,23 +208,24 @@ body {
   transform: translateX(0);
 }
 /* line 122, ../scss/application.scss */
-#sideBar ul li a {
+#sideBar ul li span {
   display: block;
   padding: 15px;
+  cursor: pointer;
   color: #fff;
   text-decoration: none;
 }
-/* line 129, ../scss/application.scss */
-#sideBar ul li a:hover {
+/* line 130, ../scss/application.scss */
+#sideBar ul li span:hover {
   background: #393535;
 }
 
-/* line 137, ../scss/application.scss */
+/* line 138, ../scss/application.scss */
 #canvasDiv {
   width: 100%;
 }
 
-/* line 141, ../scss/application.scss */
+/* line 142, ../scss/application.scss */
 #canvas {
   cursor: url(images/dot.png);
 }

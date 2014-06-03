@@ -1,5 +1,5 @@
 (function() {
-  var addPoint, canvas, canvasColor, canvasDiv, clickDrag, clickInput, clickX, clickY, context, fs, gui, header, paint, redraw, saveImage, sideBar, strokeColor, theme, win;
+  var addPoint, canvas, canvasColor, canvasDiv, chooseFile, clickDrag, clickInput, clickX, clickY, context, fs, gui, header, paint, redraw, saveImage, sideBar, strokeColor, theme, win;
 
   fs = require('fs');
 
@@ -69,6 +69,30 @@
     } else {
       return sideBar.addClass('open');
     }
+  });
+
+  chooseFile = function(name, done) {
+    var chooser;
+    chooser = $(name);
+    chooser.change(function(evt) {
+      return done($(this).val());
+    });
+    return chooser.trigger('click');
+  };
+
+  saveImage = function(path) {
+    var buf, data, img;
+    img = $('#canvas')[0].toDataURL();
+    data = img.replace(/^data:image\/\w+;base64,/, "");
+    buf = new Buffer(data, 'base64');
+    return fs.writeFile(path, buf);
+  };
+
+  $('.save-btn').on('click', function(e) {
+    e.preventDefault();
+    return chooseFile('#saveDialog', function(path) {
+      return saveImage(path);
+    });
   });
 
   strokeColor = theme[0].mainColor;
@@ -192,14 +216,6 @@
   $('#canvas').mouseleave(function(e) {
     return paint = false;
   });
-
-  saveImage = function() {
-    var buf, data, img;
-    img = $('#canvas')[0].toDataURL();
-    data = img.replace(/^data:image\/\w+;base64,/, "");
-    buf = new Buffer(data, 'base64');
-    return fs.writeFile('image.png', buf);
-  };
 
   redraw();
 
