@@ -1,5 +1,5 @@
 (function() {
-  var addPoint, canvas, canvasColor, canvasDiv, chooseFile, clearCanvas, clickDrag, clickX, clickY, context, fs, gui, header, paint, redraw, saveImage, sideBar, strokeColor, theme, win;
+  var addPoint, canvas, canvasColor, canvasDiv, chooseFile, clearCanvas, clickDrag, clickStrokeColor, clickStrokeWidth, clickX, clickY, context, fs, gui, header, paint, redraw, saveImage, selectedTheme, selectedTool, sideBar, strokeColor, strokeWidth, theme, win;
 
   fs = require('fs');
 
@@ -12,6 +12,10 @@
   clickY = new Array();
 
   clickDrag = new Array();
+
+  clickStrokeColor = new Array();
+
+  clickStrokeWidth = new Array();
 
   paint = void 0;
 
@@ -35,26 +39,37 @@
     }
   ];
 
-  $(".global-icon-close").on('click', function() {
-    return win.close(true);
+  selectedTheme = theme[0];
+
+  strokeColor = selectedTheme.mainColor;
+
+  strokeWidth = 1;
+
+  canvasColor = selectedTheme.baseColor;
+
+  selectedTool = 'pen';
+
+  canvasDiv = document.getElementById('canvasDiv');
+
+  $(canvasDiv).css({
+    height: $(window).height() - header.innerHeight()
   });
 
-  $('.global-icon-minimize').on('click', function() {
-    return win.minimize();
-  });
+  canvas = document.createElement('canvas');
 
-  $('.global-icon-maximize').on('click', function() {
-    return win.maximize();
-  });
+  canvas.setAttribute('id', 'canvas');
 
-  $('.js-menu-btn').on('click', function(e) {
-    e.preventDefault();
-    if (sideBar.hasClass('open')) {
-      return sideBar.removeClass('open');
-    } else {
-      return sideBar.addClass('open');
-    }
-  });
+  canvas.setAttribute('width', $(canvasDiv).width());
+
+  canvas.setAttribute('height', $(canvasDiv).height());
+
+  canvasDiv.appendChild(canvas);
+
+  if (typeof G_vmlCanvasManager !== 'undefined') {
+    canvas = G_vmlCanvasManager.initElement(canvas);
+  }
+
+  context = canvas.getContext('2d');
 
   chooseFile = function(name, done) {
     var chooser;
@@ -80,6 +95,27 @@
     return redraw();
   };
 
+  $(".global-icon-close").on('click', function() {
+    return win.close(true);
+  });
+
+  $('.global-icon-minimize').on('click', function() {
+    return win.minimize();
+  });
+
+  $('.global-icon-maximize').on('click', function() {
+    return win.maximize();
+  });
+
+  $('.js-menu-btn').on('click', function(e) {
+    e.preventDefault();
+    if (sideBar.hasClass('open')) {
+      return sideBar.removeClass('open');
+    } else {
+      return sideBar.addClass('open');
+    }
+  });
+
   $('.js-save-btn').on('click', function(e) {
     return chooseFile('#saveDialog', function(path) {
       return saveImage(path);
@@ -90,9 +126,21 @@
     return clearCanvas();
   });
 
-  strokeColor = theme[0].mainColor;
-
-  canvasColor = theme[0].baseColor;
+  $('.js-paint-tool-btn').on('click', function() {
+    var icon;
+    icon = $(this).find('.icon');
+    if (selectedTool === 'pen') {
+      icon.removeClass('fa-eraser');
+      icon.addClass('fa-pencil');
+      selectedTool = 'eraser';
+      return strokeColor = selectedTheme.baseColor;
+    } else {
+      icon.removeClass('fa-pencil');
+      icon.addClass('fa-eraser');
+      selectedTool = 'pen';
+      return strokeColor = selectedTheme.mainColor;
+    }
+  });
 
   theme.forEach(function(t) {
     var li;
@@ -111,8 +159,9 @@
     theme_name = target.data('theme-name');
     return theme.forEach(function(t) {
       if (t.name === theme_name) {
-        strokeColor = t.mainColor;
-        canvasColor = t.baseColor;
+        selectedTheme = t;
+        strokeColor = selectedTheme.mainColor;
+        canvasColor = selectedTheme.baseColor;
         $(canvasDiv).css({
           backgroundColor: canvasColor
         });
@@ -122,28 +171,6 @@
       }
     });
   });
-
-  canvasDiv = document.getElementById('canvasDiv');
-
-  $(canvasDiv).css({
-    height: $(window).height() - header.innerHeight()
-  });
-
-  canvas = document.createElement('canvas');
-
-  canvas.setAttribute('id', 'canvas');
-
-  canvas.setAttribute('width', $(canvasDiv).width());
-
-  canvas.setAttribute('height', $(canvasDiv).height());
-
-  canvasDiv.appendChild(canvas);
-
-  if (typeof G_vmlCanvasManager !== 'undefined') {
-    canvas = G_vmlCanvasManager.initElement(canvas);
-  }
-
-  context = canvas.getContext('2d');
 
   $(window).on('resize', function(e) {
     var canvasHeight, canvasWidth;
@@ -161,19 +188,21 @@
   addPoint = function(x, y, dragging) {
     clickX.push(x);
     clickY.push(y);
-    return clickDrag.push(dragging);
+    clickDrag.push(dragging);
+    clickStrokeColor.push(strokeColor);
+    return clickStrokeWidth.push(strokeWidth);
   };
 
   redraw = function() {
     var i, _results;
     context.fillStyle = canvasColor;
     context.fillRect(0, 0, context.canvas.width, context.canvas.height);
-    context.strokeStyle = strokeColor;
     context.lineJoin = 'round';
-    context.lineWidth = 1;
     i = 0;
     _results = [];
     while (i < clickX.length) {
+      context.strokeStyle = strokeColor;
+      context.lineWidth = strokeWidth;
       context.beginPath();
       if (clickDrag[i] && i) {
         context.moveTo(clickX[i - 1], clickY[i - 1]);
