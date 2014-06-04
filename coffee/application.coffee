@@ -2,15 +2,6 @@ fs    = require 'fs'
 gui   = require 'nw.gui'
 win   = gui.Window.get()
 
-clickInput = (id)->
-  event = document.createEvent('MouseEvents')
-  event.initMouseEvent('click')
-  document.getElementById(id).dispatchEvent(event)
-
-document.addEventListener 'keyup', (e)=>
-  if e.keyCode == 'N'.charCodeAt(0) && e.ctrlKey
-    gui.Window.open 'index.html'
-
 clickX = new Array()
 clickY = new Array()
 clickDrag = new Array()
@@ -47,7 +38,7 @@ $('.global-icon-minimize').on 'click', ->
 $('.global-icon-maximize').on 'click', ->
   win.maximize()
 
-$('.menu-btn').on 'click', (e)->
+$('.js-menu-btn').on 'click', (e)->
   e.preventDefault()
   if sideBar.hasClass('open')
     sideBar.removeClass('open')
@@ -67,12 +58,17 @@ saveImage = (path)->
   buf = new Buffer(data, 'base64')
   fs.writeFile path, buf
 
-$('.save-btn').on 'click', (e)->
+clearCanvas = ->
+  clickX = new Array()
+  clickY = new Array()
+  clickDrag = new Array()
+  redraw()
+
+$('.js-save-btn').on 'click', (e)->
   chooseFile '#saveDialog', (path)->
     saveImage(path)
 
-# $('.sign-in-btn').on 'clickl', (e)->
-
+$('.js-clear-all-btn').on 'click', -> clearCanvas()
 
 strokeColor = theme[0].mainColor
 canvasColor = theme[0].baseColor
@@ -168,6 +164,13 @@ $('#canvas').mouseup (e) ->
 
 $('#canvas').mouseleave (e) ->
   paint = false
+
+# Keyboard shortcut
+document.addEventListener 'keyup', (e)=>
+  if e.keyCode == 'N'.charCodeAt(0) && e.ctrlKey
+    gui.Window.open 'index.html'
+  else if e.keyCode == 'C'.charCodeAt(0)
+    clearCanvas()
 
 # Initialize methods
 redraw()

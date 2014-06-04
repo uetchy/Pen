@@ -1,6 +1,7 @@
 .DS_Store
 .sass-cache
 .bundle
-vendor/bundle
+vendor/bundle/
+vendor/components/
 node_modules/
 build/

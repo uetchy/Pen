@@ -1,26 +1,11 @@
 (function() {
-  var addPoint, canvas, canvasColor, canvasDiv, chooseFile, clickDrag, clickInput, clickX, clickY, context, fs, gui, header, paint, redraw, saveImage, sideBar, strokeColor, theme, win;
+  var addPoint, canvas, canvasColor, canvasDiv, chooseFile, clearCanvas, clickDrag, clickX, clickY, context, fs, gui, header, paint, redraw, saveImage, sideBar, strokeColor, theme, win;
 
   fs = require('fs');
 
   gui = require('nw.gui');
 
   win = gui.Window.get();
-
-  clickInput = function(id) {
-    var event;
-    event = document.createEvent('MouseEvents');
-    event.initMouseEvent('click');
-    return document.getElementById(id).dispatchEvent(event);
-  };
-
-  document.addEventListener('keyup', (function(_this) {
-    return function(e) {
-      if (e.keyCode === 'N'.charCodeAt(0) && e.ctrlKey) {
-        return gui.Window.open('index.html');
-      }
-    };
-  })(this));
 
   clickX = new Array();
 
@@ -62,7 +47,7 @@
     return win.maximize();
   });
 
-  $('.menu-btn').on('click', function(e) {
+  $('.js-menu-btn').on('click', function(e) {
     e.preventDefault();
     if (sideBar.hasClass('open')) {
       return sideBar.removeClass('open');
@@ -88,10 +73,21 @@
     return fs.writeFile(path, buf);
   };
 
-  $('.save-btn').on('click', function(e) {
+  clearCanvas = function() {
+    clickX = new Array();
+    clickY = new Array();
+    clickDrag = new Array();
+    return redraw();
+  };
+
+  $('.js-save-btn').on('click', function(e) {
     return chooseFile('#saveDialog', function(path) {
       return saveImage(path);
     });
+  });
+
+  $('.js-clear-all-btn').on('click', function() {
+    return clearCanvas();
   });
 
   strokeColor = theme[0].mainColor;
@@ -215,6 +211,16 @@
   $('#canvas').mouseleave(function(e) {
     return paint = false;
   });
+
+  document.addEventListener('keyup', (function(_this) {
+    return function(e) {
+      if (e.keyCode === 'N'.charCodeAt(0) && e.ctrlKey) {
+        return gui.Window.open('index.html');
+      } else if (e.keyCode === 'C'.charCodeAt(0)) {
+        return clearCanvas();
+      }
+    };
+  })(this));
 
   redraw();
 

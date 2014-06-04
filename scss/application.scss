@@ -1,6 +1,9 @@
 @import "compass";
 @import "compass/reset";
 
+$fa-font-path: "../fonts";
+@import "../vendor/components/font-awesome/scss/font-awesome";
+
 *, *:before, *:after {
   @include box-sizing(border-box);
 }
@@ -12,9 +15,6 @@ html, body {
 
   -webkit-touch-callout: none;
   -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 
@@ -102,7 +102,6 @@ body {
 }
 
 #sideBar {
-  width: 120px;
   height: 100%;
   position: absolute;
 
@@ -129,6 +128,10 @@ body {
 
         &:hover {
           background: darken(#544d4d, 10%);
+        }
+
+        .fa {
+          font-size: 20px;
         }
       }
     }
