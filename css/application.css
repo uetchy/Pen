@@ -2282,15 +2282,19 @@ body {
   float: left;
 }
 /* line 69, ../scss/application.scss */
+.menu.menu-tool {
+  float: right;
+}
+/* line 73, ../scss/application.scss */
 .menu.menu-theme {
   float: right;
 }
-/* line 72, ../scss/application.scss */
+/* line 76, ../scss/application.scss */
 .menu.menu-theme ul li {
   width: 120px;
 }
 
-/* line 78, ../scss/application.scss */
+/* line 82, ../scss/application.scss */
 .global-icon {
   width: 12px;
   height: 12px;
@@ -2303,29 +2307,29 @@ body {
   border-radius: 6px;
 }
 
-/* line 86, ../scss/application.scss */
+/* line 90, ../scss/application.scss */
 .global-icon-close {
   background-color: #f7534d;
 }
 
-/* line 90, ../scss/application.scss */
+/* line 94, ../scss/application.scss */
 .global-icon-minimize {
   background-color: #fdda86;
 }
 
-/* line 94, ../scss/application.scss */
+/* line 98, ../scss/application.scss */
 .global-icon-maximize {
   background-color: #b2cc63;
 }
 
-/* line 98, ../scss/application.scss */
+/* line 102, ../scss/application.scss */
 .splitter {
   width: 100%;
   height: 5px;
   background: #f2d99c;
 }
 
-/* line 104, ../scss/application.scss */
+/* line 108, ../scss/application.scss */
 #sideBar {
   height: 100%;
   position: absolute;
@@ -2342,7 +2346,7 @@ body {
   -o-transform: translateX(-120px);
   transform: translateX(-120px);
 }
-/* line 115, ../scss/application.scss */
+/* line 119, ../scss/application.scss */
 #sideBar.open {
   -webkit-transform: translateX(0);
   -moz-transform: translateX(0);
@@ -2350,7 +2354,7 @@ body {
   -o-transform: translateX(0);
   transform: translateX(0);
 }
-/* line 121, ../scss/application.scss */
+/* line 125, ../scss/application.scss */
 #sideBar ul li span {
   display: block;
   padding: 15px;
@@ -2358,21 +2362,21 @@ body {
   color: #fff;
   text-decoration: none;
 }
-/* line 129, ../scss/application.scss */
+/* line 133, ../scss/application.scss */
 #sideBar ul li span:hover {
   background: #393535;
 }
-/* line 133, ../scss/application.scss */
+/* line 137, ../scss/application.scss */
 #sideBar ul li span .fa {
   font-size: 20px;
 }
 
-/* line 141, ../scss/application.scss */
+/* line 145, ../scss/application.scss */
 #canvasDiv {
   width: 100%;
 }
 
-/* line 145, ../scss/application.scss */
+/* line 149, ../scss/application.scss */
 #canvas {
   cursor: url(images/dot.png);
 }

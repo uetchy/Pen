@@ -2,14 +2,18 @@ fs    = require 'fs'
 gui   = require 'nw.gui'
 win   = gui.Window.get()
 
-clickX = new Array()
-clickY = new Array()
-clickDrag = new Array()
+clickX           = new Array()
+clickY           = new Array()
+clickDrag        = new Array()
+clickStrokeColor = new Array()
+clickStrokeWidth = new Array()
+
 paint = undefined
 
 header = $('#header')
 sideBar = $('#sideBar')
 
+# Initialize theme
 theme = [
   {
     name: 'Tori'
@@ -28,23 +32,29 @@ theme = [
   }
 ]
 
-# Window management
-$(".global-icon-close").on 'click', ->
-  win.close true
+selectedTheme = theme[0]
+strokeColor = selectedTheme.mainColor
+strokeWidth = 1
 
-$('.global-icon-minimize').on 'click', ->
-  win.minimize()
+canvasColor = selectedTheme.baseColor
 
-$('.global-icon-maximize').on 'click', ->
-  win.maximize()
 
-$('.js-menu-btn').on 'click', (e)->
-  e.preventDefault()
-  if sideBar.hasClass('open')
-    sideBar.removeClass('open')
-  else
-    sideBar.addClass('open')
+selectedTool = 'pen'
 
+# Initialize canvas
+canvasDiv = document.getElementById('canvasDiv')
+$(canvasDiv).css height: $(window).height() - header.innerHeight()
+
+canvas = document.createElement('canvas')
+canvas.setAttribute 'id', 'canvas'
+canvas.setAttribute 'width', $(canvasDiv).width()
+canvas.setAttribute 'height', $(canvasDiv).height()
+
+canvasDiv.appendChild canvas
+canvas = G_vmlCanvasManager.initElement(canvas) unless typeof G_vmlCanvasManager is 'undefined'
+context = canvas.getContext('2d')
+
+# Functions
 chooseFile = (name, done)->
   chooser = $(name)
   chooser.change (evt)->
@@ -64,14 +74,43 @@ clearCanvas = ->
   clickDrag = new Array()
   redraw()
 
+# Window management
+$(".global-icon-close").on 'click', ->
+  win.close true
+
+$('.global-icon-minimize').on 'click', ->
+  win.minimize()
+
+$('.global-icon-maximize').on 'click', ->
+  win.maximize()
+
+$('.js-menu-btn').on 'click', (e)->
+  e.preventDefault()
+  if sideBar.hasClass('open')
+    sideBar.removeClass('open')
+  else
+    sideBar.addClass('open')
+
 $('.js-save-btn').on 'click', (e)->
   chooseFile '#saveDialog', (path)->
     saveImage(path)
 
 $('.js-clear-all-btn').on 'click', -> clearCanvas()
 
-strokeColor = theme[0].mainColor
-canvasColor = theme[0].baseColor
+$('.js-paint-tool-btn').on 'click', ->
+  icon = $(this).find('.icon')
+  if selectedTool == 'pen'
+    icon.removeClass('fa-eraser')
+    icon.addClass('fa-pencil')
+    selectedTool = 'eraser'
+
+    strokeColor = selectedTheme.baseColor
+  else
+    icon.removeClass('fa-pencil')
+    icon.addClass('fa-eraser')
+    selectedTool = 'pen'
+
+    strokeColor = selectedTheme.mainColor
 
 # Generate menu-items
 theme.forEach (t)->
@@ -89,26 +128,14 @@ $('.theme-label').on 'click', (e)->
   theme_name = target.data('theme-name')
   theme.forEach (t)->
     if t.name == theme_name
-      strokeColor = t.mainColor
-      canvasColor = t.baseColor
+      selectedTheme = t
+      strokeColor = selectedTheme.mainColor
+      canvasColor = selectedTheme.baseColor
       $(canvasDiv).css backgroundColor: canvasColor
       redraw()
 
       $('.theme-label').removeClass 'active'
       target.addClass 'active'
-
-# Initialize canvas
-canvasDiv = document.getElementById('canvasDiv')
-$(canvasDiv).css height: $(window).height() - header.innerHeight()
-
-canvas = document.createElement('canvas')
-canvas.setAttribute 'id', 'canvas'
-canvas.setAttribute 'width', $(canvasDiv).width()
-canvas.setAttribute 'height', $(canvasDiv).height()
-
-canvasDiv.appendChild canvas
-canvas = G_vmlCanvasManager.initElement(canvas) unless typeof G_vmlCanvasManager is 'undefined'
-context = canvas.getContext('2d')
 
 # Resize handler
 $(window).on 'resize', (e)->
@@ -123,19 +150,20 @@ addPoint = (x, y, dragging) ->
   clickX.push x
   clickY.push y
   clickDrag.push dragging
+  clickStrokeColor.push strokeColor
+  clickStrokeWidth.push strokeWidth
 
 redraw = ->
-  # Clears the canvas
   # context.clearRect 0, 0, context.canvas.width, context.canvas.height
   context.fillStyle = canvasColor
   context.fillRect 0, 0, context.canvas.width, context.canvas.height
 
-  context.strokeStyle = strokeColor
   context.lineJoin = 'round'
-  context.lineWidth = 1
   i = 0
 
   while i < clickX.length
+    context.strokeStyle = strokeColor
+    context.lineWidth   = strokeWidth
     context.beginPath()
     if clickDrag[i] and i
       context.moveTo clickX[i - 1], clickY[i - 1]
