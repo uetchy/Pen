@@ -1,6 +1,6 @@
 {
   "name": "Pen",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "main": "app://host/index.html",
   "scripts": {
     "start": "node_modules/nodewebkit/bin/nodewebkit"
