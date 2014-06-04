@@ -8,7 +8,7 @@ html
     header#header
       nav.menu.menu-global
         ul
-          li.menu-btn Pen
+          li.js-menu-btn Pen
           li.global-icon.global-icon-close
           li.global-icon.global-icon-minimize
           li.global-icon.global-icon-maximize
@@ -18,7 +18,10 @@ html
 
     #sideBar
       ul
-        li: span.save-btn Save
+        li: span.js-save-btn title='Save Image'
+          i.fa.fa-save
+        li: span.js-clear-all-btn title='Clear All'
+          i.fa.fa-square-o
 
     #canvasDiv
 
