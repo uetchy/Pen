@@ -1,14 +1,3 @@
-exclude = [
-  '!**/.gitignore'
-  '!**/.DS_Store'
-  '!**/Thumbs.db'
-  '!**/*.coffee'
-  '!**/*.scss'
-  '!**/css.compile/**'
-  '!**/coffee/'
-  '!**/scss/'
-]
-
 module.exports = (grunt) ->
   'use strict'
 
@@ -58,6 +47,7 @@ module.exports = (grunt) ->
         './css/**',
         './images/**',
         './js/**',
+        './fonts/**',
         './index.html',
         './node_modules/**',
         '!./node_modules/grunt*/**',
