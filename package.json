@@ -7,8 +7,8 @@
   },
   "window": {
     "title": "Pen",
-    "toolbar": true,
-    "frame": true,
+    "toolbar": false,
+    "frame": false,
     "width": 800,
     "height": 500,
     "position": "mouse",
