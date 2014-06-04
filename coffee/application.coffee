@@ -19,18 +19,20 @@ theme = [
     name: 'Tori'
     mainColor: '#8e763d'
     baseColor: '#f2d99c'
-  },
-  {
-    name: 'Mozuku'
-    mainColor: '#75a77c'
-    baseColor: '#a0e0a9'
-  },
-  {
-    name: 'Maguro'
-    mainColor: '#7f3333'
-    baseColor: '#c15555'
   }
 ]
+
+# ,
+#   {
+#     name: 'Mozuku'
+#     mainColor: '#75a77c'
+#     baseColor: '#a0e0a9'
+#   },
+#   {
+#     name: 'Maguro'
+#     mainColor: '#7f3333'
+#     baseColor: '#c15555'
+#   }
 
 selectedTheme = theme[0]
 strokeColor = selectedTheme.mainColor
@@ -72,6 +74,8 @@ clearCanvas = ->
   clickX = new Array()
   clickY = new Array()
   clickDrag = new Array()
+  clickStrokeColor = new Array()
+  clickStrokeWidth = new Array()
   redraw()
 
 # Window management
@@ -95,22 +99,25 @@ $('.js-save-btn').on 'click', (e)->
   chooseFile '#saveDialog', (path)->
     saveImage(path)
 
-$('.js-clear-all-btn').on 'click', -> clearCanvas()
+$('.js-clear-all-btn').on 'click', ->
+  clearCanvas()
 
 $('.js-paint-tool-btn').on 'click', ->
   icon = $(this).find('.icon')
   if selectedTool == 'pen'
     icon.removeClass('fa-eraser')
     icon.addClass('fa-pencil')
-    selectedTool = 'eraser'
 
+    selectedTool = 'eraser'
     strokeColor = selectedTheme.baseColor
+    strokeWidth = 10
   else
     icon.removeClass('fa-pencil')
     icon.addClass('fa-eraser')
-    selectedTool = 'pen'
 
+    selectedTool = 'pen'
     strokeColor = selectedTheme.mainColor
+    strokeWidth = 1
 
 # Generate menu-items
 theme.forEach (t)->
@@ -162,8 +169,8 @@ redraw = ->
   i = 0
 
   while i < clickX.length
-    context.strokeStyle = strokeColor
-    context.lineWidth   = strokeWidth
+    context.strokeStyle = clickStrokeColor[i]
+    context.lineWidth   = clickStrokeWidth[i]
     context.beginPath()
     if clickDrag[i] and i
       context.moveTo clickX[i - 1], clickY[i - 1]

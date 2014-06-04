@@ -28,14 +28,6 @@
       name: 'Tori',
       mainColor: '#8e763d',
       baseColor: '#f2d99c'
-    }, {
-      name: 'Mozuku',
-      mainColor: '#75a77c',
-      baseColor: '#a0e0a9'
-    }, {
-      name: 'Maguro',
-      mainColor: '#7f3333',
-      baseColor: '#c15555'
     }
   ];
 
@@ -92,6 +84,8 @@
     clickX = new Array();
     clickY = new Array();
     clickDrag = new Array();
+    clickStrokeColor = new Array();
+    clickStrokeWidth = new Array();
     return redraw();
   };
 
@@ -133,12 +127,14 @@
       icon.removeClass('fa-eraser');
       icon.addClass('fa-pencil');
       selectedTool = 'eraser';
-      return strokeColor = selectedTheme.baseColor;
+      strokeColor = selectedTheme.baseColor;
+      return strokeWidth = 10;
     } else {
       icon.removeClass('fa-pencil');
       icon.addClass('fa-eraser');
       selectedTool = 'pen';
-      return strokeColor = selectedTheme.mainColor;
+      strokeColor = selectedTheme.mainColor;
+      return strokeWidth = 1;
     }
   });
 
@@ -201,8 +197,8 @@
     i = 0;
     _results = [];
     while (i < clickX.length) {
-      context.strokeStyle = strokeColor;
-      context.lineWidth = strokeWidth;
+      context.strokeStyle = clickStrokeColor[i];
+      context.lineWidth = clickStrokeWidth[i];
       context.beginPath();
       if (clickDrag[i] && i) {
         context.moveTo(clickX[i - 1], clickY[i - 1]);
