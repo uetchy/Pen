@@ -35,10 +35,17 @@ theme = [
 
 Tools = [
   {
+    id: 0
     name: 'Pen'
     defaultStrokeWidth: 1
   },
   {
+    id: 1
+    name: 'Accent Pen'
+    defaultStrokeWidth: 1
+  },
+  {
+    id: 2
     name: 'Eraser'
     defaultStrokeWidth: 10
   }
