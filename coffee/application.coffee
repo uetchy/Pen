@@ -21,7 +21,6 @@ theme = [
     baseColor: '#f2d99c'
   }
 ]
-
 # ,
 #   {
 #     name: 'Mozuku'
@@ -34,12 +33,22 @@ theme = [
 #     baseColor: '#c15555'
 #   }
 
+Tools = [
+  {
+    name: 'Pen'
+    defaultStrokeWidth: 1
+  },
+  {
+    name: 'Eraser'
+    defaultStrokeWidth: 10
+  }
+]
+
 selectedTheme = theme[0]
 strokeColor = selectedTheme.mainColor
 strokeWidth = 1
 
 canvasColor = selectedTheme.baseColor
-
 
 selectedTool = 'pen'
 

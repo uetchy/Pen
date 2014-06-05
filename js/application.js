@@ -1,5 +1,5 @@
 (function() {
-  var addPoint, canvas, canvasColor, canvasDiv, chooseFile, clearCanvas, clickDrag, clickStrokeColor, clickStrokeWidth, clickX, clickY, context, fs, gui, header, paint, redraw, saveImage, selectedTheme, selectedTool, sideBar, strokeColor, strokeWidth, theme, win;
+  var Tools, addPoint, canvas, canvasColor, canvasDiv, chooseFile, clearCanvas, clickDrag, clickStrokeColor, clickStrokeWidth, clickX, clickY, context, fs, gui, header, paint, redraw, saveImage, selectedTheme, selectedTool, sideBar, strokeColor, strokeWidth, theme, win;
 
   fs = require('fs');
 
@@ -28,6 +28,16 @@
       name: 'Tori',
       mainColor: '#8e763d',
       baseColor: '#f2d99c'
+    }
+  ];
+
+  Tools = [
+    {
+      name: 'Pen',
+      defaultStrokeWidth: 1
+    }, {
+      name: 'Eraser',
+      defaultStrokeWidth: 10
     }
   ];
 
