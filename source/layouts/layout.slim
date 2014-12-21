@@ -1,0 +1,19 @@
+doctype html
+html
+  head
+    meta charset="utf-8"
+    meta content="IE=edge, chrome=1" http-equiv="X-UA-Compatible"
+    meta content="width=device-width, minimal-ui" name="viewport"
+    meta content="PEN" name="description"
+    meta content="PEN" name="keywords"
+
+    link href="images/favicon.ico" rel="shortcut icon"
+
+    = stylesheet_link_tag "all"
+
+    title Pen: the missing painter
+  body
+    = yield
+    = google_analytics_tag
+    javascript:
+      UserVoice=window.UserVoice||[];(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/7d84dvnTILp8qmyM1lc7Q.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})();
