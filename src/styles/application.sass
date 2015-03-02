@@ -1,0 +1,122 @@
+@mixin clearfix
+
+
+*, *:before, *:after
+  box-sizing: border-box
+
+html, body
+  width: 100%
+  height: 100%
+  overflow: hidden
+
+  -webkit-touch-callout: none
+  -webkit-user-select: none
+  user-select: none
+
+body
+  font-family: sans-serif
+  -webkit-font-smoothing: antialiased
+
+  background-color: #544d4d
+
+#header
+  -webkit-app-region: drag
+  position: relative
+
+  background: #544d4d
+  color: #fff
+
+  +clearfix
+
+.menu
+  -webkit-app-region: no-drag
+
+  ul
+    +clearfix
+
+    li
+      float: left
+      padding: 15px
+
+      font-family: Acrom, sans-serif
+      font-size: 12px
+      text-align: center
+      text-transform: uppercase
+      letter-spacing: 2px
+
+      cursor: pointer
+
+      -webkit-transform-origin: 0 100%
+      transition: all 0.2s ease-in-out
+
+      &:hover:not(.active)
+        transform: scale(1.0, 0.9)
+
+  &.menu-global
+    float: left
+
+  &.menu-tool
+    float: right
+
+  &.menu-theme
+    float: right
+
+    ul li
+      width: 120px
+
+.global-icon
+  width: 12px
+  height: 12px
+  padding: 0 !important
+  margin: 14px 8px 0 0
+  border-radius: 6px
+
+.global-icon-close
+  background-color: #f7534d
+
+.global-icon-minimize
+  background-color: #fdda86
+
+.global-icon-maximize
+  background-color: #b2cc63
+
+.splitter
+  width: 100%
+  height: 5px
+  background: #f2d99c
+
+#sideBar
+  height: 100%
+  position: absolute
+
+  background: #544d4d
+  color: #fff
+  font-family: Acrom, sans-serif
+
+  transition: all 0.2s ease-in-out
+  transform: translateX(-120px)
+
+  &.open
+    transform: translateX(0)
+
+  ul
+    li
+      span
+        display: block
+        padding: 15px
+
+        cursor: pointer
+        color: #fff
+        text-decoration: none
+
+        &:hover
+          background: darken(#544d4d, 10%)
+
+        .fa
+          font-size: 20px
+
+#canvasDiv
+  width: 100%
+
+#canvas
+  cursor: url(images/dot.png)
