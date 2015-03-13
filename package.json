@@ -1,16 +1,16 @@
 {
   "name": "Pen",
   "version": "1.0.0",
-  "main": "app/index.html",
+  "main": "build/index.html",
   "scripts": {
-    "start": "node_modules/nodewebkit/bin/nodewebkit",
+    "start": "./node_modules/.bin/nw",
     "test": "./node_modules/.bin/mocha --compilers coffee:coffee-script/register test/",
     "build": "./node_modules/.bin/nwbuild"
   },
   "window": {
     "title": "Pen",
-    "toolbar": false,
-    "frame": false,
+    "toolbar": true,
+    "frame": true,
     "width": 800,
     "height": 500,
     "position": "mouse",
@@ -18,20 +18,28 @@
     "min_height": 200
   },
   "devDependencies": {
-    "chai": "^2.1.0",
+    "browserify": "^9.0.3",
+    "chai": "^2.1.1",
+    "coffee-react": "^2.4.1",
     "coffee-script": "^1.9.1",
+    "coffeeify": "^1.0.0",
+    "debowerify": "^1.2.0",
     "decomposer": "^1.0.1",
     "gulp": "^3.8.11",
     "gulp-coffee": "^2.3.1",
-    "gulp-plumber": "^0.6.6",
+    "gulp-if": "^1.2.5",
+    "gulp-plumber": "^1.0.0",
     "gulp-sass": "^1.3.3",
     "gulp-slim": "0.0.13",
     "gulp-sourcemaps": "^1.5.0",
     "gulp-uglify": "^1.1.0",
-    "mocha": "^2.1.0",
-    "node-webkit-builder": "^1.0.10",
-    "nw": "^0.12.0-rc1",
-    "require-dir": "^0.1.0"
+    "mocha": "^2.2.1",
+    "node-webkit-builder": "^1.0.11",
+    "nw": "^0.12.0",
+    "require-dir": "^0.1.0",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "yargs": "^3.5.4"
   },
   "webkit": {
     "plugin": true

@@ -1,10 +1,28 @@
 gulp       = require 'gulp'
-coffee     = require 'gulp-coffee'
+uglify     = require 'gulp-uglify'
 sourcemaps = require 'gulp-sourcemaps'
+browserify = require 'browserify'
+source     = require 'vinyl-source-stream'
+buffer     = require 'vinyl-buffer'
+gulpif     = require 'gulp-if'
+{argv}     = require 'yargs'
+
+debug = !argv.production
 
 gulp.task 'scripts', ->
-  gulp.src 'src/scripts/**/*.coffee'
-    .pipe sourcemaps.init()
-    .pipe coffee bare: true
-    .pipe sourcemaps.write('.')
-    .pipe gulp.dest 'build/js'
+  browserify
+    entries: ['./src/scripts/index.coffee']
+    extensions: ['.coffee', '.js']
+    debug: debug
+  .transform 'coffeeify'
+  .transform 'debowerify'
+  .bundle()
+  .on 'error', (err) ->
+    console.log err.message
+    this.emit 'end'
+  .pipe source 'bundle.js'
+  .pipe buffer()
+  .pipe gulpif debug, sourcemaps.init(loadMaps: true)
+  .pipe gulpif !debug, uglify()
+  .pipe gulpif debug, sourcemaps.write('.')
+  .pipe gulp.dest 'build/js'

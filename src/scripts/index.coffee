@@ -1,3 +1,4 @@
+$     = require 'jquery'
 fs    = require 'fs'
 gui   = require 'nw.gui'
 win   = gui.Window.get()
@@ -10,8 +11,8 @@ clickStrokeWidth = new Array()
 
 paint = undefined
 
-header = $('#header')
-sideBar = $('#sideBar')
+header  = $ '#header'
+sideBar = $ '#sideBar'
 
 # Initialize theme
 theme = [
@@ -38,12 +39,12 @@ Tools = [
     id: 0
     name: 'Pen'
     defaultStrokeWidth: 1
-  },
+  }
   {
     id: 1
     name: 'Accent Pen'
     defaultStrokeWidth: 1
-  },
+  }
   {
     id: 2
     name: 'Eraser'
@@ -60,7 +61,7 @@ canvasColor = selectedTheme.baseColor
 selectedTool = 'pen'
 
 # Initialize canvas
-canvasDiv = document.getElementById('canvasDiv')
+canvasDiv = document.getElementById 'canvasDiv'
 $(canvasDiv).css height: $(window).height() - header.innerHeight()
 
 canvas = document.createElement('canvas')
