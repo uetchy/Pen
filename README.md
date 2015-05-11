@@ -6,5 +6,4 @@ Pen is the missing paint tool for Rakugaki.
 
 - Clone this repository
 - `$ npm install`
-- `$ bower install`
 - `$ gulp build`

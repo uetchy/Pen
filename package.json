@@ -1,47 +1,24 @@
 {
-  "name": "Pen",
+  "name": "pen",
   "version": "1.0.0",
-  "main": "build/index.html",
+  "main": "app/index.js",
   "scripts": {
-    "start": "./node_modules/.bin/nw",
-    "test": "./node_modules/.bin/mocha --compilers coffee:coffee-script/register test/",
-    "build": "./node_modules/.bin/nwbuild"
-  },
-  "window": {
-    "title": "Pen",
-    "toolbar": true,
-    "frame": true,
-    "width": 800,
-    "height": 500,
-    "position": "mouse",
-    "min_width": 500,
-    "min_height": 200
+    "start": "$(npm bin)/electron ./app"
   },
   "devDependencies": {
-    "browserify": "^9.0.3",
-    "chai": "^2.1.2",
-    "coffee-react": "^3.0.1",
-    "coffee-script": "^1.9.1",
-    "coffeeify": "^1.0.0",
-    "debowerify": "^1.2.0",
-    "decomposer": "^1.0.1",
+    "electron-prebuilt": "^0.25.3",
     "gulp": "^3.8.11",
-    "gulp-coffee": "^2.3.1",
-    "gulp-if": "^1.2.5",
-    "gulp-plumber": "^1.0.0",
-    "gulp-sass": "^1.3.3",
-    "gulp-slim": "0.1.0",
-    "gulp-sourcemaps": "^1.5.1",
-    "gulp-uglify": "^1.1.0",
-    "mocha": "^2.2.1",
-    "node-webkit-builder": "^1.0.11",
-    "nw": "^0.12.0-1",
-    "require-dir": "^0.3.0",
-    "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0",
-    "yargs": "^3.6.0"
+    "gulp-sass": "^2.0.0"
   },
-  "webkit": {
-    "plugin": true
-  }
+  "dependencies": {
+    "jquery": "^2.1.4"
+  },
+  "description": "Pen is the missing paint tool for Rakugaki.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RandomPaper/Pen.git"
+  },
+  "author": "Yasuaki Uechi",
+  "license": "MIT",
+  "homepage": "https://github.com/RandomPaper/Pen"
 }

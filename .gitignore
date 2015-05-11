@@ -1,6 +1,2 @@
 .DS_Store
-.sass-cache
-.bundle
-node_modules/
-bower_components/
-build/
+node_modules
