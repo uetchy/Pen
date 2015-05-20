@@ -1,15 +1,13 @@
 var gulp = require('gulp');
-var sass = require('gulp-sass');
+var stylus = require('gulp-stylus');
 
-gulp.task('styles', function() {
-  gulp.src('app/styles/*.sass')
-    .pipe(sass({
-      indentedSyntax: true
-    }))
-    .pipe(gulp.dest('app/css'));
+gulp.task('stylus', function() {
+  gulp.src('app/stylus/*.styl')
+    .pipe(stylus())
+    .pipe(gulp.dest('app/assets/css'));
 });
 
 gulp.task('watch', function() {
-  gulp.watch('src/markups/**/*', ['markups']);
-  gulp.watch('src/styles/**/*', ['styles']);
+  gulp.watch('app/stylus/*.styl', ['stylus']);
 });
+// "electron-prebuilt": "^0.25.3",

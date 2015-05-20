@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Pen</title>
+    <link href="assets/css/index.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <p>loaded</p>
+    <div id="appContainer"></div>
+    <script>
+      window.onload = function() {
+        require("babel/register")({
+          experimental: true
+        });
+        require("./index.js");
+      }
+    </script>
+  </body>
+</html>

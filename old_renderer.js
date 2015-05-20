@@ -1,8 +1,6 @@
-var app = require('app');
-var BrowserWindow = require('browser-window');
-
 var $ = require('jquery');
 var fs = require('fs');
+
 var clickX = new Array();
 var clickY = new Array();
 var clickDrag = new Array();
@@ -11,25 +9,6 @@ var clickStrokeWidth = new Array();
 var paint = false;
 var header = document.querySelector('#header');
 var sideBar = document.querySelector('#sideBar');
-var mainWindow = null;
-
-require('crash-reporter').start();
-
-app.on('window-all-closed', function(){
-  if (process.platform != 'darwin') {
-    app.quit();
-  }
-});
-
-app.on('ready', function() {
-  mainWindow = new BrowserWindow({width: 800, height: 600});
-
-  mainWindow.loadUrl('file://' + __dirname + '/index.html');
-
-  mainWindow.on('closed', function() {
-    mainWindow = null;
-  });
-});
 
 var theme = [
   {
