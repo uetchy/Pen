@@ -7,17 +7,19 @@ export default class Toolbar extends React.Component {
         <nav className="menu menu-global">
           <ul>
             <li className="js-menu-btn">Pen</li>
-            <li className="global-icon global-icon-close"></li>
-            <li className="global-icon global-icon-minimize"></li>
-            <li className="global-icon global-icon-maximize"></li>
+            <li className="global-icon global-icon-close" />
+            <li className="global-icon global-icon-minimize" />
+            <li className="global-icon global-icon-maximize" />
           </ul>
         </nav>
         <nav className="menu menu-theme">
-          <ul className="js-theme"></ul>
+          <ul className="js-theme" />
         </nav>
         <nav className="menu menu-tool">
           <ul>
-            <li className="js-paint-tool-btn"><i className="icon fa fa-eraser"></i></li>
+            <li className="js-paint-tool-btn">
+              <i className="icon fa fa-eraser" />
+            </li>
           </ul>
         </nav>
       </header>

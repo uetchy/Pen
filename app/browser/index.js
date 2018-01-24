@@ -1,17 +1,17 @@
-import app from "app";
-import BrowserWindow from "browser-window";
+import app from 'app'
+import BrowserWindow from 'browser-window'
 
-let mainWindow = null;
+let mainWindow = null
 
-require('crash-reporter').start();
+require('crash-reporter').start()
 
 const launchMainWindow = () => {
-  mainWindow = new BrowserWindow({width: 800, height: 600});
+  mainWindow = new BrowserWindow({ width: 800, height: 600 })
   // mainWindow.maximize();
-  mainWindow.loadUrl('file://' + __dirname + '/../renderer/index.html');
-  mainWindow.openDevTools();
-  mainWindow.on('closed', () => mainWindow = null);
-};
+  mainWindow.loadUrl('file://' + __dirname + '/../renderer/index.html')
+  mainWindow.openDevTools()
+  mainWindow.on('closed', () => (mainWindow = null))
+}
 
-app.on('window-all-closed', () => app.quit());
-app.on('ready', launchMainWindow);
+app.on('window-all-closed', () => app.quit())
+app.on('ready', launchMainWindow)
