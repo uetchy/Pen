@@ -1,26 +1,28 @@
 {
   "name": "pen",
+  "description": "Pen is the missing paint tool for Rakugaki.",
   "version": "1.0.0",
-  "main": "app/bootstrap.js",
+  "author": "Yasuaki Uechi",
+  "main": "app/main",
   "scripts": {
     "start": "electron ."
   },
-  "devDependencies": {},
   "dependencies": {
-    "babel": "^6.23.0",
+    "@babel/register": "^7.4.4",
     "electron-prebuilt": "^1.4.13",
     "fluxxor": "^1.5.3",
     "jquery": "^3.3.1",
     "react": "^16.2.0",
-    "react-router": "^4.2.0",
-    "superagent": "^3.8.2"
+    "react-router": "^5.0.0",
+    "superagent": "^5.0.5"
   },
-  "description": "Pen is the missing paint tool for Rakugaki.",
+  "devDependencies": {
+    "@babel/core": "^7.4.4"
+  },
+  "homepage": "https://github.com/RandomPaper/Pen",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/RandomPaper/Pen.git"
-  },
-  "author": "Yasuaki Uechi",
-  "license": "MIT",
-  "homepage": "https://github.com/RandomPaper/Pen"
+  }
 }
